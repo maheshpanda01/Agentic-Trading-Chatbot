@@ -1,0 +1,14 @@
+lancedb
+langchain
+langgraph
+tavily-python
+polygon
+setuptools
+ipykernel
+langchain-openai
+python-dotenv
+langchain-community
+fastapi
+uvicorn
+langchain-pinecone
+-e .

@@ -1,0 +1,21 @@
+vector_db:
+  index_name: "trading-bot"
+
+retriever:
+  top_k: 3
+  score_threshold: 0.5
+
+embedding_model:
+  provider: "openai"
+  model_name: "text-embedding-3-small"
+
+retriever:
+  top_k:  10
+
+llm:
+  provider: "openai"  
+  model_name: "gpt-4o-mini"
+     
+tools:
+  tavily:
+    max_results: 5
