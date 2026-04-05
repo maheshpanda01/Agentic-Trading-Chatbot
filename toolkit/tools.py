@@ -1,6 +1,6 @@
 import os
 from langchain.tools import tool
-from langchain_community.tools import TavilySearchResults
+from langchain_tavily import TavilySearch
 from langchain_community.tools.polygon.financials import PolygonFinancials
 from langchain_community.utilities.polygon import PolygonAPIWrapper
 from langchain_community.tools.bing_search import BingSearchResults 
@@ -15,9 +15,17 @@ api_wrapper = PolygonAPIWrapper()
 model_loader=ModelLoader()
 config = load_config()
 
+
+
+
+
 @tool(args_schema=RagToolSchema)
 def retriever_tool(question):
-    """this is retriever tool"""
+    """ALWAYS use this tool first when the user asks to summarize, analyze, 
+    explain, or find information from uploaded documents, files, reports, 
+    or the knowledge base. This tool searches the internal vector database 
+    of uploaded documents and returns relevant content."""
+
     pinecone_api_key = os.getenv("PINECONE_API_KEY")
     pc = Pinecone(api_key=pinecone_api_key)
     vector_store = PineconeVectorStore(index=pc.Index(config["vector_db"]["index_name"]), 
@@ -30,11 +38,13 @@ def retriever_tool(question):
     
     return retriever_result
 
-tavilytool = TavilySearchResults(
+tavilytool = TavilySearch(
     max_results=config["tools"]["tavily"]["max_results"],
     search_depth="advanced",
     include_answer=True,
     include_raw_content=True,
+    description="Search the web for latest news, market trends, or any real-time financial information."
     )
 
-financials_tool = PolygonFinancials(api_wrapper=api_wrapper)
+financials_tool = PolygonFinancials(api_wrapper=api_wrapper,description="Get financial statements and data for publicly traded companies using their stock ticker symbol."
+)

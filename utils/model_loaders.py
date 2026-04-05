@@ -33,8 +33,8 @@ class ModelLoader:
         Load and return the embedding model.
         """
         print("Loading Embedding model")
-        if self.embeddings is None :
-            model_name=self.config["embedding_model"]["model_name"]
+       
+        model_name = self.config["embedding_model"]["model_name"]
         return OpenAIEmbeddings(model=model_name)
 
     def load_llm(self):

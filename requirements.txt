@@ -11,4 +11,8 @@ langchain-community
 fastapi
 uvicorn
 langchain-pinecone
+langchain-tavily
+python-multipart
+jinja2
+docx2txt
 -e .
