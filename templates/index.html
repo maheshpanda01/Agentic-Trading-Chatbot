@@ -118,7 +118,11 @@
 
 <script>
   const API_BASE = 'http://localhost:8000';
-  const SESSION_ID = 'session_' + Date.now();
+  let SESSION_ID = localStorage.getItem('trading_session_id');
+  if (!SESSION_ID) {
+    SESSION_ID = 'session_' + Date.now();
+    localStorage.setItem('trading_session_id', SESSION_ID);
+  }
 
   // ── Auto-resize textarea ──
   const textarea = document.getElementById('chatInput');
