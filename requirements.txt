@@ -16,4 +16,6 @@ python-multipart
 jinja2
 docx2txt
 langgraph-checkpoint-sqlite
+ragas
+datasets
 -e .
