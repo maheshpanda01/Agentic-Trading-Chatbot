@@ -9,8 +9,6 @@ embedding_model:
   provider: "openai"
   model_name: "text-embedding-3-small"
 
-retriever:
-  top_k:  10
 
 llm:
   provider: "openai"  
